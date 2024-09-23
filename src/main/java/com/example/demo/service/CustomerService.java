@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Isolation;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -67,7 +66,7 @@ public class CustomerService {
 
         log.info("Updated {} with {}", id, customer);
 
-        Thread.sleep(5 * 1000L);
+        Thread.sleep(10 * 1000L);
         return entity;
     }
 
