@@ -5,6 +5,8 @@ import com.example.demo.database.CustomerEntityRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -40,8 +42,23 @@ public class CustomerService {
         return this.repository.count();
     }
 
-    //TODO: Transaction
-    @Transactional
+    //TODO: Adding serialization to the query
+    @Transactional(isolation =  Isolation.SERIALIZABLE)
+    public void logById(Long id) {
+        while(true) {
+            Optional<CustomerEntity> entity = this.repository.findById(id);
+            log.info("Current state for entity {} is {}", id, entity);
+
+            try {
+                Thread.sleep(500L);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+
+        }
+    }
+
+    @Transactional(isolation = Isolation.SERIALIZABLE)
     public CustomerEntity update(Long id, CustomerEntity customer) throws InterruptedException {
         CustomerEntity customerEntity = this.repository.findById(id).orElseThrow();
         customerEntity.setAge(customer.getAge());
