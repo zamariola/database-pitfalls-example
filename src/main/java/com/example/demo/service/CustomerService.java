@@ -4,6 +4,7 @@ import com.example.demo.database.CustomerEntity;
 import com.example.demo.database.CustomerEntityRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -15,6 +16,8 @@ public class CustomerService {
 
     private final CustomerTotalService customerTotalService;
 
+    //TODO: Add transactional to avoid partial updates
+    @Transactional
     public CustomerEntity save(CustomerEntity customer) {
         final var entity = this.repository.save(customer);
 
