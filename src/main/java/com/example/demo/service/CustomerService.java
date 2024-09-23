@@ -41,7 +41,6 @@ public class CustomerService {
         return this.repository.count();
     }
 
-    //TODO: Adding serialization to the query
     @Transactional(isolation =  Isolation.SERIALIZABLE)
     public void logById(Long id) {
         while(true) {

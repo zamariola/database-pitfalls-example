@@ -17,4 +17,7 @@ public class CustomerEntity {
     private Long id;
     private String name;
     private Integer age;
+
+    @Version
+    private Long version;
 }
