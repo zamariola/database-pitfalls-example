@@ -15,5 +15,8 @@ public class CustomerCounterEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    //TODO: 1 - Rename
+     @Column(name = "total_customer")
     private Integer total;
 }
