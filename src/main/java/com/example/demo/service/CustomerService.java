@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 @AllArgsConstructor
@@ -33,6 +34,22 @@ public class CustomerService {
 
     public List<CustomerEntity> findAll() {
         return this.repository.findAll();
+    }
+
+    public long count() {
+        return this.repository.count();
+    }
+
+    public CustomerEntity update(Long id, CustomerEntity customer) throws InterruptedException {
+        CustomerEntity customerEntity = this.repository.findById(id).orElseThrow();
+        customerEntity.setAge(customer.getAge());
+        customerEntity.setName(customer.getName());
+        final var entity = this.repository.save(customerEntity);
+
+        log.info("Updated {} with {}", id, customer);
+
+        Thread.sleep(60 * 1000L);
+        return entity;
     }
 
 }
