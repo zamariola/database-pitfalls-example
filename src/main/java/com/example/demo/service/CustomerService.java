@@ -22,7 +22,6 @@ public class CustomerService {
     public CustomerEntity save(CustomerEntity customer) {
         final var entity = this.repository.save(customer);
 
-        //TODO: add try catch to avoid stopping the transaction
         try {
             this.customerTotalService.calculateTotal();
         } catch (Exception ex) {
