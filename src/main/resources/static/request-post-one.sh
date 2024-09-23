@@ -1,0 +1,1 @@
+curl localhost:8080/customers  -d '{"name": "James Halpert", "age": 35}' -H "Content-Type:application/json";
