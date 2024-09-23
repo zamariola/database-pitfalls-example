@@ -27,6 +27,7 @@ public class CustomerController {
 
     @PostMapping(consumes = {"application/json"})
     public ResponseEntity<CustomerEntity> save(@RequestBody CustomerEntity customer) {
+
         final var entity = this.customerService.save(customer);
         return ResponseEntity.ok(entity);
     }

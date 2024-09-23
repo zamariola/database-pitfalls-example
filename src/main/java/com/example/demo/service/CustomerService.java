@@ -13,8 +13,14 @@ public class CustomerService {
 
     private final CustomerEntityRepository repository;
 
+    private final CustomerTotalService customerTotalService;
+
     public CustomerEntity save(CustomerEntity customer) {
-        return this.repository.save(customer);
+        final var entity = this.repository.save(customer);
+
+        this.customerTotalService.calculateTotal();
+
+        return entity;
     }
 
     public List<CustomerEntity> findAll() {
