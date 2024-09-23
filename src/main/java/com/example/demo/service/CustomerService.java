@@ -40,6 +40,8 @@ public class CustomerService {
         return this.repository.count();
     }
 
+    //TODO: Transaction
+    @Transactional
     public CustomerEntity update(Long id, CustomerEntity customer) throws InterruptedException {
         CustomerEntity customerEntity = this.repository.findById(id).orElseThrow();
         customerEntity.setAge(customer.getAge());
@@ -48,7 +50,7 @@ public class CustomerService {
 
         log.info("Updated {} with {}", id, customer);
 
-        Thread.sleep(60 * 1000L);
+        Thread.sleep(5 * 1000L);
         return entity;
     }
 
